@@ -1,7 +1,17 @@
 package com.javarush.cryptanalyzer.gerasin;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        ReadingFile.readingFiles();
+
+
+
+
+
+
+
     }
 }

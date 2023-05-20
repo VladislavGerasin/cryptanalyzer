@@ -22,12 +22,12 @@ public class Encrypt {
         return cipherText.toString();
     }
 
-    public static void encryptFile() throws Exception {
+    public static void encryptFile () throws Exception {
         // Определяем путь к файлу, который необходимо зашифровать
-        ReadingFile fileInput = (ReadingFile) Path.of("input.txt");
-        String fileName = fileInput.toString();
+//        ReadingFile fileInput = (ReadingFile) Path.of("input.txt");
+        String fileName = "X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\input.txt";
         File inputFile = new File(fileName);
-        File outputFile = new File("encrypt");
+        File outputFile = new File("X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\encrypt.txt");
 
         // Создаем FileInputStream для чтения содержимого файла на вход
         FileInputStream inputStream = new FileInputStream(inputFile);
@@ -43,6 +43,7 @@ public class Encrypt {
             String encryptedLine = encrypt(line, 3); // Здесь 3 - это ключ шифрования
             writer.write(encryptedLine + "\n");
         }
+        System.out.println(outputFile);
 
         // Закрываем потоки
         reader.close();

@@ -24,8 +24,8 @@ public class Main {
                 throw new RuntimeException(e);
             }
         }
-        Encrypt fileOutput = (Encrypt) Path.of("encrypt");
-        System.out.println(fileOutput);
+
+
 
 
     }

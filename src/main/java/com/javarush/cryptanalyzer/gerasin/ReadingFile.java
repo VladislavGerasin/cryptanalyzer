@@ -1,26 +1,28 @@
 package com.javarush.cryptanalyzer.gerasin;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class ReadingFile {
-    public static void readingFiles() {
-        String src = "input.txt";
+        public static void app() throws Exception {
+            // Получаем InputStream для файла из папки resources
+            InputStream inputStream = ReadingFile.class.getClassLoader().getResourceAsStream("input.txt");
 
-        try(FileReader in = new FileReader(src);
-            BufferedReader reader = new BufferedReader(in))
-        {
-            while (reader.ready())
-            {
-                String line = reader.readLine();
+            // Создаем BufferedReader для чтения содержимого файла
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            // Читаем содержимое файла построчно
+            String line;
+            while ((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+            // Закрываем потоки
+            reader.close();
+            inputStream.close();
         }
     }
-}
+

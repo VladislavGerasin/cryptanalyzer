@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9486059-b706-4cb4-b6bd-538153d95bf4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/gerasin/BruteForce.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/gerasin/Decipher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/gerasin/Interface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/gerasin/Encrypt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/gerasin/Encrypt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/gerasin/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/gerasin/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/encrypt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/gerasin/ReadingFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/gerasin/ReadingFile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684579611627</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="работает, но надо придумать что то с путем к файлу">
+      <created>1684580981745</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1684580981745</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -110,6 +120,7 @@
     <MESSAGE value="коммит" />
     <MESSAGE value="чтение файла" />
     <MESSAGE value="добавил класс, который шифрует" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавил класс, который шифрует" />
+    <MESSAGE value="работает, но надо придумать что то с путем к файлу" />
+    <option name="LAST_COMMIT_MESSAGE" value="работает, но надо придумать что то с путем к файлу" />
   </component>
 </project>

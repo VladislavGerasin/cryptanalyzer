@@ -1,4 +1,6 @@
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -19,6 +21,10 @@ public class Controller {
                 break;
             case "2":
                 LaunchDecoderFile();
+                break;
+            case "3":
+                doBreakCoder();
+                break;
 
         }
 
@@ -56,10 +62,20 @@ public class Controller {
                 encoder.writeToFile(encryptedText);
                 break;
             case "2":
-                System.out.println(menu.ENTER_KEY);
-                int key = scanner.nextInt();
+                int key;
+
+                do {
+                    System.out.println(menu.ENTER_KEY);
+                    key = scanner.nextInt();
+
+                    if (key <= 0) {
+                        System.out.println(menu.NEGATIVE_ENTER_KEY);
+                    }
+                } while (key <= 0);
+
                 String encryptedTextNewKey = encoder.encryptCaesarCipher(read.readFileAsCharArray(read.getInput()), key);
                 encoder.writeToFile(encryptedTextNewKey);
+
 
         }
     }
@@ -84,8 +100,14 @@ public class Controller {
             case "2":
                 System.out.println(menu.ENTER_WAY);
                 String way = scanner.nextLine();
-                System.out.println(menu.ENTER_KEY);
-                int key = scanner.nextInt();
+                int key;
+                do{
+                    System.out.println(menu.ENTER_KEY);
+                    key = scanner.nextInt();
+                    if (key <= 0) {
+                        System.out.println(menu.NEGATIVE_ENTER_KEY);
+                }
+                }while (key <= 0);
                 String encryptedTextNewKey = encoder.encryptCaesarCipher(read.readFileAsCharArray(read.setInput(Path.of(way))), key);
                 encoder.writeToFile(encryptedTextNewKey);
 
@@ -152,6 +174,15 @@ public class Controller {
                 String decryptedTextNewKey = decoder.decodingCaesarCipher(read.readFileAsCharArray(read.setInput(Path.of(wayNew))), encoder.setKey(key));
                 Decoder.writeToFileEncrypt(decryptedTextNewKey);
         }
+    }
+
+    public void doBreakCoder(){
+        Path filePath = Paths.get("X:\\project\\new.txt");
+        List<String> encryptedText = read.readFileAsCharArray(filePath);
+        String outputFileName = "X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\breaktext.txt";
+        breakCoder.decryptAndWriteToFile(encryptedText, outputFileName);
+
+
     }
 
 

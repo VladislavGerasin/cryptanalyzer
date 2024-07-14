@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Encoder {
     Read read = new Read();
-    private int key = 5;
+    private int key = 10;
     String encryptedText = encryptCaesarCipher(read.readFileAsCharArray(read.getInput()), key);
 
     public int getKey() {

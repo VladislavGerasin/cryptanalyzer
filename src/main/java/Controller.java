@@ -17,10 +17,10 @@ public class Controller {
         String message = scanner.nextLine();
         switch (message) {
             case "1":
-                LaunchEncodeFile();
+                launchEncodeFile();
                 break;
             case "2":
-                LaunchDecoderFile();
+                launchDecoderFile();
                 break;
             case "3":
                 doBreakCoder();
@@ -30,7 +30,7 @@ public class Controller {
 
     }
 
-        public void LaunchEncodeFile() {
+        public void launchEncodeFile() {
 
             Scanner scanner = new Scanner(System.in);
             String message;
@@ -80,8 +80,6 @@ public class Controller {
         }
     }
 
-
-
     public void encodeFileCustom() {
 
         Scanner scanner = new Scanner(System.in);
@@ -116,7 +114,7 @@ public class Controller {
 
 
 
-    public void LaunchDecoderFile() {
+    public void launchDecoderFile() {
 
         Scanner scanner = new Scanner(System.in);
         String message;
@@ -146,8 +144,14 @@ public class Controller {
                 decoder.writeToFileEncrypt(decoderText);
                 break;
             case "2":
-                System.out.println(menu.ENTER_KEY);
-                int key = scanner.nextInt();
+                int key;
+                do{
+                    System.out.println(menu.ENTER_KEY);
+                    key = scanner.nextInt();
+                    if (key <= 0) {
+                        System.out.println(menu.NEGATIVE_ENTER_KEY);
+                    }
+                }while (key <= 0);
                 String decryptedTextNewKey = decoder.decodingCaesarCipher(read.readFileAsCharArray(read.setInput(Path.of("X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\output.txt"))), encoder.setKey(key));
                 Decoder.writeToFileEncrypt(decryptedTextNewKey);
         }
@@ -169,18 +173,40 @@ public class Controller {
             case "2":
                 System.out.println(menu.ENTER_WAY );
                 String wayNew = scanner.nextLine();
-                System.out.println(menu.ENTER_KEY);
-                int key = scanner.nextInt();
+                int key;
+                do{
+                    System.out.println(menu.ENTER_KEY);
+                    key = scanner.nextInt();
+                    if (key <= 0) {
+                        System.out.println(menu.NEGATIVE_ENTER_KEY);
+                    }
+
+                }while (key <= 0);
                 String decryptedTextNewKey = decoder.decodingCaesarCipher(read.readFileAsCharArray(read.setInput(Path.of(wayNew))), encoder.setKey(key));
                 Decoder.writeToFileEncrypt(decryptedTextNewKey);
         }
     }
 
     public void doBreakCoder(){
-        Path filePath = Paths.get("X:\\project\\new.txt");
-        List<String> encryptedText = read.readFileAsCharArray(filePath);
-        String outputFileName = "X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\breaktext.txt";
-        breakCoder.decryptAndWriteToFile(encryptedText, outputFileName);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(menu.INPUT_CODE_DECRYPT);
+        String message = scanner.nextLine();
+        switch (message){
+            case "1":
+                Path filePath = Path.of("X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\output.txt");
+                List<String> encryptedText = read.readFileAsCharArray(read.setInput(filePath));
+                String outputFileName = "X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\breaktext.txt";
+                breakCoder.brutForceDecryptAndWriteToFile(encryptedText, Path.of(outputFileName));
+                break;
+            case "2":
+                System.out.println("Введите путь к файлу");
+                String way = scanner.nextLine();
+                Path file = Path.of(way);
+                List<String> encryptedTextCustom = read.readFileAsCharArray(read.setInput(file));
+                String outputFile = "X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\breaktext.txt";
+                breakCoder.brutForceDecryptAndWriteToFile(encryptedTextCustom, Path.of(outputFile));
+        }
+
 
 
     }

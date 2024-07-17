@@ -1,80 +1,61 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BreakCoder {
     CryptoAlphabet cryptoAlphabet = new CryptoAlphabet();
-    private final int MAX_KEY = cryptoAlphabet.ALPHABET.length();
 
-    public void decryptAndWriteToFile(List<String> encryptedText, String outputFileName) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName))) {
-            for (String line : encryptedText) {
-                String decryptedLine = decryptWithAutoKey(line);
-                writer.write(decryptedLine);
-                writer.newLine();
+    public void brutForceDecryptAndWriteToFile(List<String> encryptedText, Path outputPath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath.toFile()))) {
+            String bestDecryptedText = "";
+            int bestShift = 0;
+            for (int shift = 1; shift < 32; shift++) {
+                String decryptedText = decrypt(encryptedText, shift);
+                if (checkForPopularWords(decryptedText)) {
+                    bestShift = shift;
+                    bestDecryptedText = decryptedText;
+                }
             }
+            writer.write("Ключ " + bestShift + ": " + bestDecryptedText);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Ошибка записи файла: " + e.getMessage());
         }
     }
 
-    private String decryptWithAutoKey(String encrypted) {
-        int bestKey = findBestKey(encrypted);
-        return decrypt(encrypted, bestKey);
-    }
-
-    private int findBestKey(String encrypted) {
-        int maxWordsMatched = 0;
-        int bestKey = 0;
-
-        for (int key = 0; key < MAX_KEY; key++) {
-            String decrypted = decrypt(encrypted, key);
-            int wordsMatched = countMatchingWords(decrypted);
-            if (wordsMatched > maxWordsMatched) {
-                maxWordsMatched = wordsMatched;
-                bestKey = key;
+    private boolean checkForPopularWords(String text) {
+        String[] words = text.split(" ");
+        for (String word : words) {
+            for (PopularWords popularWord : PopularWords.values()) {
+                if (word.equalsIgnoreCase(popularWord.name())) {
+                    return true;
+                }
             }
         }
-
-        return bestKey;
+        return false;
     }
 
+    private String decrypt(List<String> encryptedText, int shift) {
+        if (shift >= cryptoAlphabet.ALPHABET.length()) {
 
-    private String decrypt(String encrypted, int key) {
+            return "Неверный ключ";
+        }
+
         StringBuilder decryptedText = new StringBuilder();
-        for (char ch : encrypted.toCharArray()) {
-            int index = (cryptoAlphabet.ALPHABET.indexOf(ch) - key + cryptoAlphabet.ALPHABET.length()) % cryptoAlphabet.ALPHABET.length();
-            decryptedText.append(cryptoAlphabet.ALPHABET.charAt(index));
+        for (String line : encryptedText) {
+            for (char symbol : line.toCharArray()) {
+                if (cryptoAlphabet.ALPHABET.contains(String.valueOf(symbol))) {
+                    int charIndex = cryptoAlphabet.ALPHABET.indexOf(symbol);
+                    int newIndex = (charIndex - shift + cryptoAlphabet.ALPHABET.length()) % cryptoAlphabet.ALPHABET.length();
+                    decryptedText.append(cryptoAlphabet.ALPHABET.charAt(newIndex));
+                } else {
+                    decryptedText.append(symbol);
+                }
+            }
+            decryptedText.append("\n");
         }
         return decryptedText.toString();
     }
-
-    private int countMatchingWords(String text) {
-        String[] words = text.split("\\s+");
-        int matchedWords = 0;
-
-        for (String word : words) {
-            if (isInDictionary(word)) {
-                matchedWords++;
-            }
-        }
-
-        return matchedWords;
-    }
-
-
-    private boolean isInDictionary(String word) {
-        try {
-            PopularWords popularWord = PopularWords.valueOf(word.toUpperCase());
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
-
-
-
-    }
-
 }

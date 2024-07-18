@@ -24,7 +24,8 @@ public class Decoder {
     }
 
     public static void writeToFileEncrypt(String data) {
-        try (FileWriter fileWriter = new FileWriter("X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\encrypt.txt")) {
+
+        try (FileWriter fileWriter = new FileWriter("encrypt.txt")) {
             fileWriter.write(data);
         } catch (IOException e) {
             System.err.println("Ошибка при записи в файл: " + e.getMessage());

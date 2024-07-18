@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Read {
+
     Path input = Path.of("src\\main\\resources\\input.txt");
+
 
 
     public Path getInput() {

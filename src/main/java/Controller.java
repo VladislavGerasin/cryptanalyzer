@@ -140,7 +140,7 @@ public class Controller {
         String message = scanner.nextLine();
         switch (message){
             case "1":
-                String decoderText = decoder.decodingCaesarCipher(read.readFileAsCharArray(read.setInput(Path.of("X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\output.txt"))), encoder.getKey());
+                String decoderText = decoder.decodingCaesarCipher(read.readFileAsCharArray(read.setInput(Path.of( "output.txt"))), encoder.getKey());
                 decoder.writeToFileEncrypt(decoderText);
                 break;
             case "2":
@@ -152,7 +152,8 @@ public class Controller {
                         System.out.println(menu.NEGATIVE_ENTER_KEY);
                     }
                 }while (key <= 0);
-                String decryptedTextNewKey = decoder.decodingCaesarCipher(read.readFileAsCharArray(read.setInput(Path.of("X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\output.txt"))), encoder.setKey(key));
+
+                String decryptedTextNewKey = decoder.decodingCaesarCipher(read.readFileAsCharArray(read.setInput(Path.of( "output.txt"))), encoder.setKey(key));
                 Decoder.writeToFileEncrypt(decryptedTextNewKey);
         }
     }
@@ -193,17 +194,17 @@ public class Controller {
         String message = scanner.nextLine();
         switch (message){
             case "1":
-                Path filePath = Path.of("X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\output.txt");
+                Path filePath = Path.of("output.txt");
                 List<String> encryptedText = read.readFileAsCharArray(read.setInput(filePath));
-                String outputFileName = "X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\breaktext.txt";
+                String outputFileName = "breakText.txt";
                 breakCoder.brutForceDecryptAndWriteToFile(encryptedText, Path.of(outputFileName));
                 break;
             case "2":
-                System.out.println("Введите путь к файлу");
+                System.out.println(menu.ENTER_WAY);
                 String way = scanner.nextLine();
                 Path file = Path.of(way);
                 List<String> encryptedTextCustom = read.readFileAsCharArray(read.setInput(file));
-                String outputFile = "X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\breaktext.txt";
+                String outputFile = "breakText.txt";
                 breakCoder.brutForceDecryptAndWriteToFile(encryptedTextCustom, Path.of(outputFile));
         }
 

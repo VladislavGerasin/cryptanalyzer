@@ -33,8 +33,8 @@ public class Encoder {
     return cipherTextBuilder.toString();
 }
 
-    public static void writeToFile(String data) {
-        try (FileWriter fileWriter = new FileWriter("X:\\JDK\\projeck\\cryptanalyzer\\src\\main\\resources\\output.txt")) {
+    public void writeToFile(String data) {
+        try (FileWriter fileWriter = new FileWriter("output.txt")) {
             fileWriter.write(data);
         } catch (IOException e) {
             System.err.println("Ошибка при записи в файл: " + e.getMessage());

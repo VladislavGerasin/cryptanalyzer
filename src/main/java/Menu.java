@@ -11,7 +11,7 @@ public class Menu {
     public static final String ENTER_KEY = "Пожалуйста, введите ключ:";
     public static final String NEGATIVE_ENTER_KEY = "\"Введенный ключ меньше или равен нулю. Пожалуйста, введите ключ больше нуля\"";
     public static final String ENTER_WAY = "Введите путь:";
-    public static final String BREAK_CODE_WAY = "Укажите путь для сохранение расшифрованного файла:";
+
 
 
 }

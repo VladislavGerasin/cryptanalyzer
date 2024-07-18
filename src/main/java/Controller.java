@@ -140,7 +140,7 @@ public class Controller {
         String message = scanner.nextLine();
         switch (message){
             case "1":
-                String decoderText = decoder.decodingCaesarCipher(read.readFileAsCharArray(read.setInput(Path.of( "output.txt"))), encoder.getKey());
+                String decoderText = decoder.decodingCaesarCipher(read.readFileAsCharArray(read.setInput(Path.of( "src\\main\\resources\\output.txt"))), encoder.getKey());
                 decoder.writeToFileEncrypt(decoderText);
                 break;
             case "2":
@@ -153,7 +153,7 @@ public class Controller {
                     }
                 }while (key <= 0);
 
-                String decryptedTextNewKey = decoder.decodingCaesarCipher(read.readFileAsCharArray(read.setInput(Path.of( "output.txt"))), encoder.setKey(key));
+                String decryptedTextNewKey = decoder.decodingCaesarCipher(read.readFileAsCharArray(read.setInput(Path.of( "src\\main\\resources\\output.txt"))), encoder.setKey(key));
                 Decoder.writeToFileEncrypt(decryptedTextNewKey);
         }
     }
@@ -194,9 +194,9 @@ public class Controller {
         String message = scanner.nextLine();
         switch (message){
             case "1":
-                Path filePath = Path.of("output.txt");
+                Path filePath = Path.of("src\\main\\resources\\output.txt");
                 List<String> encryptedText = read.readFileAsCharArray(read.setInput(filePath));
-                String outputFileName = "breakText.txt";
+                String outputFileName = "src\\main\\resources\\breakText.txt";
                 breakCoder.brutForceDecryptAndWriteToFile(encryptedText, Path.of(outputFileName));
                 break;
             case "2":
@@ -204,7 +204,7 @@ public class Controller {
                 String way = scanner.nextLine();
                 Path file = Path.of(way);
                 List<String> encryptedTextCustom = read.readFileAsCharArray(read.setInput(file));
-                String outputFile = "breakText.txt";
+                String outputFile = "src\\main\\resources\\breakText.txt";
                 breakCoder.brutForceDecryptAndWriteToFile(encryptedTextCustom, Path.of(outputFile));
         }
 

@@ -34,7 +34,7 @@ public class Encoder {
 }
 
     public void writeToFile(String data) {
-        try (FileWriter fileWriter = new FileWriter("output.txt")) {
+        try (FileWriter fileWriter = new FileWriter("src\\main\\resources\\output.txt")) {
             fileWriter.write(data);
         } catch (IOException e) {
             System.err.println("Ошибка при записи в файл: " + e.getMessage());
